@@ -1,11 +1,10 @@
 const path = require('path');
 const fs = require('fs');
-const {stdout} = require('process');
 
-const reader = (path) => {
+const reader = (pathForRead) => {
     return new Promise((res, rej) => {       
         let value = '';
-        const stream = fs.createReadStream(path, 'utf-8');
+        const stream = fs.createReadStream(pathForRead, 'utf-8');
         stream.on('data', (text) => value += text.toString());
         stream.on('end', () => {
             res(value);
@@ -41,7 +40,7 @@ const builder = (pathFrom, obj) => {
     });
 };
 
-const joinCss = async() => {
+const joinCss = async () => {
     try {        
         const streamWrite = fs.createWriteStream(path.join(__dirname, 'project-dist', 'style.css'));
         const pathFromCss = path.join(__dirname, 'styles');
@@ -79,8 +78,7 @@ const joinHtml = async () => {
             obj[name] = value.toString();
         }   
        }     
-       const pathToTemplate = path.join(__dirname, 'template.html');
-       await builder(pathToTemplate, obj);
+       await builder(path.join(__dirname, 'template.html'), obj);
     } catch (err) {
         throw new Error('Something wrong with html');
     }
