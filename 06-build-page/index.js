@@ -82,7 +82,7 @@ const joinHtml = async () => {
     } catch (err) {
         throw new Error('Something wrong with html');
     }
-}
+};
 
 const copyFolder = async (copyToPath, copyFromPath) => {
 
