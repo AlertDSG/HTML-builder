@@ -6,6 +6,7 @@ const {stdout} = require('process');
 (async () => {
     try {
       const pathToFolder = path.join(__dirname, 'files-copy');
+      await fs.promises.rm(pathToFolder, {recursive: true, force: true});
       await fs.promises.mkdir(pathToFolder, { recursive: true });
       stdout.write('Succeded');
     } catch (error) {
