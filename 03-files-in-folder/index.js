@@ -8,10 +8,9 @@ fs.readdir(pathToFile,  (err, data) => {
     if (err) throw new Error('Is Empty');
     data.forEach(file => {
         fs.stat(path.join(pathToFile, file), (err, info) => {
-            console.log(info.isDirectory())
             if(!err && !info.isDirectory()) {
                 const [name, ext] = file.split('.');
-                const size = info.size/1000  + "kb"
+                const size = Number(info.size/1024).toFixed(3)  + "kb";
             stdout.write(`${name} - ${ext} - ${size}\n`);
             }           
         });
